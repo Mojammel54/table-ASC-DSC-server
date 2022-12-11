@@ -51,6 +51,53 @@ async function run() {
         })
 
 
+        app.put('/status/:id', async (req, res) => {
+
+            const id = req.params.id
+            const filter = { _id: ObjectId(id) }
+            const options = { upsert: true };
+            const updatedDoc = {
+
+                $set: {
+
+
+                    status: false
+                }
+
+
+            }
+
+            const result = await taskCollection.updateOne(filter, updatedDoc, options)
+
+            res.send(result)
+
+
+        })
+
+        app.put('/!status/:id', async (req, res) => {
+
+            const id = req.params.id
+            const filter = { _id: ObjectId(id) }
+            const options = { upsert: true };
+            const updatedDoc = {
+
+                $set: {
+
+
+                    status: true
+                }
+
+
+            }
+
+            const result = await taskCollection.updateOne(filter, updatedDoc, options)
+
+            res.send(result)
+
+
+        })
+
+
 
 
 
